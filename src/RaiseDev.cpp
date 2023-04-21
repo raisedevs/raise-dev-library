@@ -131,7 +131,6 @@ const void RaiseDev::updateFirmware(const String account, const String current_f
   // Correct system time is required for SSL certificate validation
   if (!setClockViaNTP())
   {
-    log_d("Device time not yet set from NTP...");
     return;
   }
 
@@ -198,7 +197,6 @@ const bool RaiseDev::setClockViaNTP()
   // Check that the system time is above a sensible floor.
   if (current_unix_time < MINIMUM_UNIX_TIME)
   {
-    log_d("Still waiting for updated system time");
     return false;
   }
 
