@@ -17,6 +17,8 @@ Once you've signed up and had your `User` enabled, work through the following st
 
 2. In your [`platformio.ini`](https://docs.platformio.org/en/latest/projectconf/index.html), add [`raisedevs/RaiseDev`](https://registry.platformio.org/libraries/raisedevs/RaiseDev) to your [`lib_deps`](https://docs.platformio.org/en/latest/projectconf/sections/env/options/library/lib_deps.html)
 
+    - Remember to update your libraries periodically with e.g. `pio pkg update --library raisedevs/RaiseDev`!
+
 3. In your main C++ file, add:
     - `#include <RaiseDev.h>` at the top of the file to define the `RaiseDev` class in your project
 
