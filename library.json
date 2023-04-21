@@ -1,6 +1,6 @@
 {
   "name": "RaiseDev",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Raise.dev library for auto-updating from the Raise.dev Console.",
   "keywords": "autoupdate, deployment, esp8266, esp32",
   "authors": {
