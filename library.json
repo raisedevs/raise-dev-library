@@ -1,0 +1,19 @@
+{
+  "name": "RaiseDev",
+  "version": "0.0.2",
+  "description": "Raise.dev library for auto-updating from the Rails.dev Console.",
+  "keywords": "autoupdate, deployment, esp8266, esp32",
+  "authors": {
+    "name": "Mike McQuaid",
+    "url": "https://github.com/MikeMcQuaid",
+    "maintainer": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raisedevs/raise-dev-library.git"
+  },
+  "homepage": "https://raise.dev",
+  "frameworks": "arduino",
+  "platforms": "espressif8266,espressif32",
+  "headers": "RaiseDev.h"
+}
