@@ -4,11 +4,14 @@ on:
     branches:
       - main
   pull_request:
+  release:
+    types: [published]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - id: version
         name: Check and set version outputs
         run: |
@@ -19,18 +22,29 @@ jobs:
           grep "^version=${VERSION}" library.properties
 
           echo "filename=RaiseDev-${VERSION}.tar.gz" >> "$GITHUB_OUTPUT"
+
       - uses: actions/cache@v3
         with:
           path: |
             ~/.cache/pip
             ~/.platformio/.cache
           key: ${{ runner.os }}-pio
+
       - uses: actions/setup-python@v4
         with:
           python-version: "3.9"
-      - run: pip install --upgrade platformio
-      - run: pio ci --project-conf=platformio.ini --lib=. examples
-      - run: pio pkg pack --output="${{ steps.version.outputs.filename }}"
-      - run: pio pkg publish --no-interactive --owner=raisedevs --type=library "${{ steps.version.outputs.filename }}"
+
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+
+      - name: Build RaiseDev library
+        run: pio ci --project-conf=platformio.ini --lib=. examples/main.cpp
+
+      - name: Package RaiseDev PlatformIO library
+        run: pio pkg pack --output="${{ steps.version.outputs.filename }}"
+
+      - name: Publish RaiseDev PlatformIO library
+        run: pio pkg publish --no-interactive --owner=raisedevs --type=library "${{ steps.version.outputs.filename }}"
+        if: github.event_name == 'release' && github.event.action == 'published'
         env:
           PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
