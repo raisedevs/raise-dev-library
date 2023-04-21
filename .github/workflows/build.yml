@@ -23,6 +23,12 @@ jobs:
 
           echo "filename=RaiseDev-${VERSION}.tar.gz" >> "$GITHUB_OUTPUT"
 
+      - uses: arduino/arduino-lint-action@v1
+        with:
+          compliance: strict
+          # Enable once accepted into library.
+          # library-manager: update
+
       - uses: actions/cache@v3
         with:
           path: |
@@ -38,7 +44,7 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: Build RaiseDev library
-        run: pio ci --project-conf=platformio.ini --lib=. examples/main.cpp
+        run: pio ci --project-conf=platformio.ini --lib=. examples/Basic
 
       - name: Package RaiseDev PlatformIO library
         run: pio pkg pack --output="${{ steps.version.outputs.filename }}"

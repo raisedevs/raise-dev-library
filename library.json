@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/raisedevs/raise-dev-library.git"
+    "url": "https://github.com/raisedevs/raise-dev-library"
   },
   "homepage": "https://raise.dev",
   "frameworks": "arduino",
