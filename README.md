@@ -45,6 +45,12 @@ Once you've signed up and had your `User` enabled, work through the following st
 
 7. If you've set everything up correctly, when you push a new commit and/or tag to your GitHub repository: it will automatically update all your `Device`s!
 
+If you'd rather use the Arduino CLI instead, you can install this library with:
+
+```console
+arduino-cli lib install RaiseDev
+```
+
 If you have any problems: contact [Mike](mailto:mike@raise.dev) and he'll help.
 
 ## Status
