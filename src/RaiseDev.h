@@ -16,7 +16,7 @@ class RaiseDev
 {
 public:
   const void begin();
-  const void updateFirmware(String account, String current_firmware_version);
+  const void updateFirmware(String workspace, String current_firmware_version);
 
 private:
   const bool setClockViaNTP();

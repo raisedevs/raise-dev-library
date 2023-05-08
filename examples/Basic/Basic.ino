@@ -43,5 +43,5 @@ void loop()
   }
 
   // Auto-update firmware if a newer one found on RaiseDev Console.
-  raiseDev.updateFirmware("MY_RAISE_DEV_CONSOLE_ACCOUNT", "MY_FIRMWARE_VERSION");
+  raiseDev.updateFirmware("MY_RAISE_DEV_CONSOLE_WORKSPACE", "MY_FIRMWARE_VERSION");
 }

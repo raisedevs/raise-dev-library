@@ -117,10 +117,10 @@ const void RaiseDev::begin()
 }
 
 /// @brief Updates the current firmware to one from Raise.dev
-/// @param account A String containing the Raise.dev account name
+/// @param workspace A String containing the Raise.dev workspace name
 /// @param current_firmware_version A String to ensure that the firmware is not repeatedly updated to the same version
 /// @return nothing, this method will restart on success
-const void RaiseDev::updateFirmware(const String account, const String current_firmware_version)
+const void RaiseDev::updateFirmware(const String workspace, const String current_firmware_version)
 {
   // Run begin() if consumers forgot to run it.
   if (!begin_method_called)
@@ -151,7 +151,7 @@ const void RaiseDev::updateFirmware(const String account, const String current_f
   }
   last_update_attempt_milliseconds = current_milliseconds;
 
-  const String updater_url = String(RAISE_DEV_CONSOLE_DOMAIN + "/accounts/" + account + "/updater");
+  const String updater_url = String(RAISE_DEV_CONSOLE_DOMAIN + "/workspaces/" + workspace + "/updater");
   log_i("Updating current firmware version %s from %s", current_firmware_version.c_str(), updater_url.c_str());
 
   // This will update and reboot automatically on a successful, new firmware download.
