@@ -12,14 +12,38 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Check if version needs incremented
+        if: github.event_name != 'release'
+        run: |
+          set -xe
+
+          LAST_TAG="$(gh release list --limit 1 | awk '{print $1}')"
+          if [[ "$(cat VERSION)" == "${LAST_TAG}" ]]; then
+            echo "::error file=VERSION,line=1,col=1,endColumn=5::Version must be incremented!"
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - id: version
         name: Check and set version outputs
         run: |
           set -xe
 
           VERSION="$(cat VERSION)"
-          grep '"version": "'"${VERSION}"'",$' library.json
-          grep "^version=${VERSION}" library.properties
+          if ! grep '"version": "'"${VERSION}"'",$' library.json; then
+            echo "::error file=library.json,line=3,col=20,endColumn=24::Version must match ${VERSION}!"
+            FAILED=1
+          fi
+
+          if ! grep "^version=${VERSION}" library.properties; then
+            echo "::error file=library.properties,line=2,col=14,endColumn=19::Version must match ${VERSION}!"
+            FAILED=1
+          fi
+
+          if [[ -n "${FAILED}" ]]; then
+            exit 1
+          fi
 
           echo "filename=RaiseDev-${VERSION}.tar.gz" >> "$GITHUB_OUTPUT"
 
