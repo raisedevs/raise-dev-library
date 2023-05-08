@@ -26,7 +26,7 @@ Once you've signed up and had your `User` enabled, work through the following st
 
     - Add `raiseDev.begin();` in your `void setup()` function to initialize the `RaiseDev` library
 
-    - Add `raiseDev.updateFirmware(YOUR_RAISE_DEV_CONSOLE_ACCOUNT, YOUR_CURRENT_FIRMWARE_VERSION);` replacing `YOUR_RAISE_DEV_CONSOLE_ACCOUNT` with your `Account` and `YOUR_CURRENT_FIRMWARE_VERSION` with your current project version
+    - Add `raiseDev.updateFirmware(YOUR_RAISE_DEV_CONSOLE_WORKSPACE, YOUR_CURRENT_FIRMWARE_VERSION);` replacing `YOUR_RAISE_DEV_CONSOLE_WORKSPACE` with your `Workspace` and `YOUR_CURRENT_FIRMWARE_VERSION` with your current project version
 
     - Different debug output levels can be set with `CORE_DEBUG_LEVEL`.
       Enable maximum debug messaging in your `platformio.ini` with e.g. `build_flags = -DCORE_DEBUG_LEVEL=5`.
@@ -41,7 +41,7 @@ Once you've signed up and had your `User` enabled, work through the following st
       Check out the [workflow in this repository](https://github.com/raisedevs/raise-dev-library/blob/main/.github/workflows/build.yml) for an example of how to use PlatformIO in GitHub Actions.
       Note that you should use `pio run` instead of `pio ci` for building a `Firmware` GitHub repository.
 
-6. If you haven't already, add the relevant `Account` and `Firmware` in the Raise.dev Console and connect the GitHub App to your GitHub Repository for your `Firmware`.
+6. If you haven't already, add the relevant `Workspace` and `Firmware` in the Raise.dev Console and connect the GitHub App to your GitHub Repository for your `Firmware`.
 
 7. If you've set everything up correctly, when you push a new commit and/or tag to your GitHub repository: it will automatically update all your `Device`s!
 
