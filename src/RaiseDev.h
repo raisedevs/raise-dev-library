@@ -29,4 +29,8 @@ private:
   t_httpUpdate_return last_update_attempt_return_code = HTTP_UPDATE_OK;
 };
 
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_RAISE_DEV)
+extern RaiseDev raiseDev;
+#endif
+
 #endif // ___RAISE_DEV_H___
