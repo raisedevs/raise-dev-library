@@ -4,22 +4,23 @@
 // Emulate the nicer default ESP32 APIs on ESP8266
 auto httpUpdate = ESPhttpUpdate;
 
-#if defined(CORE_DEBUG_LEVEL) && CORE_DEBUG_LEVEL > 0
-#define log_d(msg, ...) ets_printf(msg, ##__VA_ARGS__);
-#else
-#define log_d(msg, ...)
-#endif
+#if defined(DEBUG_ESP_PORT)
+const void printf_with_newline(const char *message, ...)
+{
+  va_list args;
+  va_start(args, message);
+  DEBUG_ESP_PORT.printf(message, args);
+  va_end(args);
+  DEBUG_ESP_PORT.println();
+}
 
-#if defined(CORE_DEBUG_LEVEL) && CORE_DEBUG_LEVEL > 1
-#define log_e(msg, ...) ets_printf(msg, ##__VA_ARGS__);
+#define log_d(message, ...) printf_with_newline(message, ##__VA_ARGS__);
+#define log_e(message, ...) printf_with_newline(message, ##__VA_ARGS__);
+#define log_i(message, ...) printf_with_newline(message, ##__VA_ARGS__);
 #else
-#define log_e(msg, ...)
-#endif
-
-#if defined(CORE_DEBUG_LEVEL) && CORE_DEBUG_LEVEL > 3
-#define log_i(msg, ...) ets_printf(msg, ##__VA_ARGS__);
-#else
-#define log_i(msg, ...)
+#define log_d(message, ...)
+#define log_e(message, ...)
+#define log_i(message, ...)
 #endif
 #endif // defined(ESP8266)
 
@@ -211,3 +212,7 @@ const bool RaiseDev::setClockViaNTP()
 
   return true;
 }
+
+#if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_RAISE_DEV)
+RaiseDev raiseDev;
+#endif

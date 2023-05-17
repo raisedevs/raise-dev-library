@@ -13,9 +13,6 @@
 // Include RaiseDev library.
 #include <RaiseDev.h>
 
-// Create a RaiseDev instance.
-RaiseDev raiseDev;
-
 // Setup method: run once.
 void setup()
 {
@@ -43,5 +40,9 @@ void loop()
   }
 
   // Auto-update firmware if a newer one found on RaiseDev Console.
-  raiseDev.updateFirmware("MY_RAISE_DEV_CONSOLE_WORKSPACE", "MY_FIRMWARE_VERSION");
+  raiseDev.updateFirmware(
+      // Under the Workspace named MY_RAISE_DEV_CONSOLE_WORKSPACE.
+      "MY_RAISE_DEV_CONSOLE_WORKSPACE",
+      // With a version string created from `git describe` defined in platformio.ini.
+      VERSION_STRING_FROM_GIT);
 }
