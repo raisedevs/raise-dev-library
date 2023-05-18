@@ -1,10 +1,10 @@
 #include "RaiseDev.h"
 
-#if defined(ESP8266)
+#if defined(ESP8266) || defined(ARDUINO_ARCH_ESP8266)
 // Emulate the nicer default ESP32 APIs on ESP8266
 auto httpUpdate = ESPhttpUpdate;
 
-#if defined(DEBUG_ESP_PORT)
+#if defined(DEBUG_ESP_PORT) && defined(DEBUG_RAISE_DEV)
 const void printf_with_newline(const char *message, ...)
 {
   va_list args;
@@ -22,7 +22,7 @@ const void printf_with_newline(const char *message, ...)
 #define log_e(message, ...)
 #define log_i(message, ...)
 #endif
-#endif // defined(ESP8266)
+#endif // defined(ESP8266) || defined(ARDUINO_ARCH_ESP8266)
 
 const String RAISE_DEV_CONSOLE_DOMAIN =
     "https://console.raise.dev";
@@ -84,9 +84,9 @@ const void httpUpdateOnError(const int error_code)
 
 const void setSSLRootCert(WiFiClientSecure &wifiClientSecure)
 {
-#if defined(ESP32)
+#if defined(ESP32) || defined(ARDUINO_ARCH_ESP32)
   wifiClientSecure.setCACert(RAISE_DEV_CONSOLE_ROOT_CA_CERTIFICATE);
-#elif defined(ESP8266)
+#elif defined(ESP8266) || defined(ARDUINO_ARCH_ESP8266)
   wifiClientSecure.setTrustAnchors(new BearSSL::X509List(RAISE_DEV_CONSOLE_ROOT_CA_CERTIFICATE));
 #endif
 }
@@ -213,6 +213,7 @@ const bool RaiseDev::setClockViaNTP()
   return true;
 }
 
+// Define a global instance (unless told not to)
 #if !defined(NO_GLOBAL_INSTANCES) && !defined(NO_GLOBAL_RAISE_DEV)
 RaiseDev raiseDev;
 #endif

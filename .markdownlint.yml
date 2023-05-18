@@ -1,0 +1,11 @@
+# Don't care about line length
+MD013: false
+
+# Allow indented headings for lists
+MD023: false
+
+# Allow duplicate headings for lists
+MD024: false
+
+# Allow inline HTML for <details>
+MD033: false
