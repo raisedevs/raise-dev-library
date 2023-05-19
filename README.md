@@ -187,19 +187,13 @@
     - to:
 
       ```console
-      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property build.extra_flags=-DVERSION_STRING_FROM_GIT=$(git describe --tags --always) .
+      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=\"-DVERSION_STRING_FROM_GIT=$(git describe --tags --always)\"" .
       ```
 
     - or if you are passing multiple values:
 
       ```console
-      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=-DSOME_DEFINE=1 -DVERSION_STRING_FROM_GIT=$(git describe --tags --always)" .
-      ```
-
-    - or if you are passing multiple values and cannot use double quotes (e.g. in a `package.json`):
-
-      ```console
-      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property build.extra_flags=-DSOME_DEFINE=1\\ -DVERSION_STRING_FROM_GIT=$(git describe --tags --always) .
+      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=-DSOME_DEFINE=1 -DVERSION_STRING_FROM_GIT=\"$(git describe --tags --always)\"" .
       ```
 
     </details>
@@ -282,13 +276,13 @@
     - in your `arduino-cli compile` call, pass `CORE_DEBUG_LEVEL=5` to the C++ preprocessor by changing:
 
       ```console
-      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property build.extra_flags=-DVERSION_STRING_FROM_GIT=$(git describe --tags --always) .
+      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=\"$(git describe --tags --always)\"" .
       ```
 
     - to:
 
       ```console
-      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=$(git describe --tags --always) -DCORE_DEBUG_LEVEL=5" .
+      arduino-cli compile --fqbn esp32:esp32:nodemcu-32s --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=\"$(git describe --tags --always)\" -DCORE_DEBUG_LEVEL=5" .
       ```
 
     </details>
@@ -302,13 +296,13 @@
     - in your `arduino-cli compile` call, pass the necessary debug variables to the C++ preprocessor by changing:
 
       ```console
-      arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --build-property build.extra_flags=-DVERSION_STRING_FROM_GIT=$(git describe --tags --always) .
+      arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=\"$(git describe --tags --always)\"" .
       ```
 
     - to:
 
       ```console
-      arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=$(git describe --tags --always) -DDEBUG_ESP_PORT=Serial -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_RAISE_DEV" .
+      arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 --build-property "build.extra_flags=-DVERSION_STRING_FROM_GIT=\"$(git describe --tags --always)\" -DDEBUG_ESP_PORT=Serial -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_RAISE_DEV" .
       ```
 
     </details>
@@ -386,7 +380,7 @@
 
     </details>
 
-1. Ensure that the "Last Seen" for your `Device` is updated in the Raise.dev Console. This will happen even if there is no new `Version` available whenever an update is requested.
+1. Ensure that the "Last Seen" for your `Device` is updated in the Raise.dev Console. This will happen even if there is no new `Version` available whenever an update is requested. If it is not: check that WiFi is connected and the debug logs do not show any unexpected errors.
 
 1. Whenever `raiseDev.updateFirmware()` is called, if it hasn't been too long since the last check, it will check for a new `Version` in the Raise.dev Console.
    If the version differs from `VERSION_STRING_FROM_GIT`, your microcontroller's firmware will be auto-updated to that version.
