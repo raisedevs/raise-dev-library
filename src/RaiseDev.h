@@ -3,9 +3,9 @@
 
 #include <time.h>
 
-#if defined(ESP32)
+#if defined(ESP32) || defined(ARDUINO_ARCH_ESP32)
 #include <HTTPUpdate.h>
-#elif defined(ESP8266)
+#elif defined(ESP8266) || defined(ARDUINO_ARCH_ESP8266)
 #include <ESP8266httpUpdate.h>
 #else
 #error "Only ESP32 or ESP8266 are currently supported!"

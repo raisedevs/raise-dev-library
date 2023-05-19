@@ -41,8 +41,8 @@ void loop()
 
   // Auto-update firmware if a newer one found on RaiseDev Console.
   raiseDev.updateFirmware(
-      // Under the Workspace named MY_RAISE_DEV_CONSOLE_WORKSPACE.
-      "MY_RAISE_DEV_CONSOLE_WORKSPACE",
+      // Under the Workspace named `your-raise-dev-console-workspace`.
+      "your-raise-dev-console-workspace",
       // With a version string created from `git describe` defined in platformio.ini.
       VERSION_STRING_FROM_GIT);
 }
